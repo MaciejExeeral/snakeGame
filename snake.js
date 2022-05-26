@@ -12,6 +12,7 @@ $(document).ready(function () {
     let snake = Array();
     let food;
     let gameLoop;
+    let hasChangedDirections = false;
 
     /** @type {HTMLCanvasElement} */
     let gameCanvas = $("#snakeGame")[0];
@@ -58,6 +59,8 @@ $(document).ready(function () {
         moveSnake();
         drawSnake();
         drawFood();
+
+        hasChangedDirections = false;
     }
 
     function createSnake()
@@ -181,22 +184,28 @@ $(document).ready(function () {
 
     $(document).keydown(function(input) {
         let key = input.which;
-    
-        if(key == "87" && direction != "down")
+
+
+        if(key == "87" && direction != "down" && !hasChangedDirections)
         {
             direction = "up";
+            hasChangedDirections = true;
         }
-        else if(key == "65" && direction != "right")
+        else if(key == "65" && direction != "right" && !hasChangedDirections)
         {
             direction = "left";
+            hasChangedDirections = true;
         }
-        else if(key == "83" && direction != "up")
+        else if(key == "83" && direction != "up" && !hasChangedDirections)
         {
             direction = "down";
+            hasChangedDirections = true;
         }
-        else if(key == "68" && direction != "left")
+        else if(key == "68" && direction != "left" && !hasChangedDirections)
         {
             direction = "right";
+            hasChangedDirections = true;
+
         }
     });
 
